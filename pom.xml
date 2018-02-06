@@ -21,6 +21,8 @@
     </build>
     <properties>
         <webmagic-version>0.7.3</webmagic-version>
+        <mybatis-version>3.4.5</mybatis-version>
+        <mysql-connector-version>6.0.6</mysql-connector-version>
     </properties>
     <dependencies>
         <dependency>
@@ -32,6 +34,16 @@
             <groupId>us.codecraft</groupId>
             <artifactId>webmagic-extension</artifactId>
             <version>${webmagic-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${mybatis-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector-version}</version>
         </dependency>
     </dependencies>
 

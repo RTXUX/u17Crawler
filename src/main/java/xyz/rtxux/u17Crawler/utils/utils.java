@@ -1,13 +1,20 @@
 package xyz.rtxux.u17Crawler.utils;
 
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import us.codecraft.webmagic.Request;
 import us.codecraft.webmagic.model.HttpRequestBody;
 import us.codecraft.webmagic.utils.HttpConstant;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class utils {
+    private static SqlSessionFactory sqlSessionFactory = null;
+    private static ThreadLocal<SqlSession> session = new ThreadLocal<>();
     public static Map<String,Object> createComicListRequestForm(int page){
         Map<String,Object> form = new HashMap<String,Object>();
         form.put("data[group_id]","no");
@@ -35,6 +42,24 @@ public class utils {
     public static int getChapterIdByAttribute(String attribute)
     {
         return Integer.parseInt(attribute.substring(4));
+    }
+
+    public static SqlSessionFactory getSqlSessionFactory() {
+        if (sqlSessionFactory == null) {
+            try {
+                sqlSessionFactory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("mybatis-config.xml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return sqlSessionFactory;
+    }
+
+    public static SqlSession getSession() {
+        if (session.get() == null) {
+            session.set(getSqlSessionFactory().openSession());
+        }
+        return session.get();
     }
 
 }
