@@ -5,6 +5,6 @@ import xyz.rtxux.u17Crawler.model.ComicInfo;
 
 public interface ComicInfoMapper {
 
-    @Insert("INSERT into comics(ID,Name,Description) VALUES(#{comic_id}, #{name}, #{Description})")
+    @Insert("INSERT IGNORE into comics(ID,Name,Description) VALUES(#{comic_id}, #{name}, #{Description})")
     public void save(ComicInfo comic);
 }
