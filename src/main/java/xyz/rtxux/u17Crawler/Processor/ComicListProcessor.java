@@ -20,6 +20,9 @@ public class ComicListProcessor implements SubPageProcessor {
             page.putField("Type",1);
             for (ComicInfo comic : comics)
             {
+                if (utils.getDoneComics().contains(comic.getComic_id())) {
+                    continue;
+                }
                 Request request = new Request("http://www.u17.com/comic/"+comic.getComic_id()+".html");
                 request.putExtra("Type",2);
                 request.putExtra("Comic",comic);

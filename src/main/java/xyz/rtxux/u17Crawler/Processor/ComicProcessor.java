@@ -21,6 +21,8 @@ public class ComicProcessor implements SubPageProcessor{
         comic.setDescription(doc.select(".ti2").first().text());
         page.putField("Comic",comic);
         List<ChapterInfo> chapters = new LinkedList<ChapterInfo>();
+        int numChapters = doc.select("#chapter").first().children().size();
+        int currentChapter = 1;
         for (Element chapter_element : doc.select("#chapter").first().children())
         {
             Element element = chapter_element.child(0);
@@ -33,6 +35,12 @@ public class ComicProcessor implements SubPageProcessor{
             readRequest.putExtra("ChapterID",chapter.getID());
             readRequest.putExtra("Type",3);
             page.addTargetRequest(readRequest);
+            if (currentChapter == numChapters) {
+                readRequest.putExtra("LastChapter", 1);
+                readRequest.putExtra("ComicID", comic.getComic_id());
+            } else {
+                currentChapter++;
+            }
         }
         page.putField("Chapters",chapters);
         return MatchOther.NO;
