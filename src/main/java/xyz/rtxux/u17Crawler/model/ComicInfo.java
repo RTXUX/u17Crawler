@@ -1,13 +1,13 @@
 package xyz.rtxux.u17Crawler.model;
 
-public class ComicInfo
-{
+public class ComicInfo {
     private int comic_id;
     private String name;
     private String cover;
     private String line1;
     private String line2;
     private String Description;
+
     public int getComic_id() {
         return comic_id;
     }

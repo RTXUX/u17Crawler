@@ -44,9 +44,10 @@ public class ChapterPipeline implements SubPipeline {
             imageInfoMapper.save(image);
         }
         getSession().commit();
-        if (resultItems.getRequest().getExtra("LastChapter").equals(1)) {
+        utils.getRecord().getChapters().add(images.get(0).getChapterID());
+        if (resultItems.getRequest().getExtra("LastChapter") != null) {
             int ComicID = (int) resultItems.getRequest().getExtra("ComicID");
-            utils.getDoneComics().add(ComicID);
+            utils.getRecord().getComics().add(ComicID);
         }
         return MatchOther.NO;
     }

@@ -39,7 +39,7 @@ public class u17Crawler {
             utils.setSqlConnectionProperties(sqlConnectionProperties);
             System.out.println("RecordFile: ");
             filepath = reader.readLine();
-            utils.setDoneComicsPath(filepath);
+            utils.setRecordPath(filepath);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -52,7 +52,7 @@ public class u17Crawler {
         cpp.addSubPageProcessor(new ChapterProcessor());
         Spider spider = Spider.create(cpp).addPipeline(compositePipeline).thread(4);
         spider.addRequest(utils.createComicListRequest(1));
-        Runtime.getRuntime().addShutdownHook(new Thread(utils::saveDoneComics));
+        Runtime.getRuntime().addShutdownHook(new Thread(utils::saveRecord));
         spider.runAsync();
         try {
             while (true) {
