@@ -54,6 +54,7 @@ public class u17Crawler {
         spider.addRequest(utils.createComicListRequest(1));
         Runtime.getRuntime().addShutdownHook(new Thread(utils::saveRecord));
         spider.runAsync();
+        System.out.println("Started!\nType \"stop\" to Stop");
         try {
             while (true) {
                 if (reader.readLine().equals("stop")) {
